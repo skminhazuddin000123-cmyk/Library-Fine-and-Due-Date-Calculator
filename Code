@@ -1,0 +1,27 @@
+
+from datetime import datetime, timedelta
+
+print("===== LIBRARY FINE AND DUE-DATE CALCULATOR =====")
+
+issue_date = input("Enter issue date (DD-MM-YYYY): ")
+issue = datetime.strptime(issue_date, "%d-%m-%Y")
+
+days_allowed = int(input("Enter allowed borrowing days: "))
+fine_per_day = float(input("Enter fine per day (Rs.): "))
+
+due_date = issue + timedelta(days=days_allowed)
+
+print("Due Date:", due_date.strftime("%d-%m-%Y"))
+
+return_date = input("Enter return date (DD-MM-YYYY): ")
+returned = datetime.strptime(return_date, "%d-%m-%Y")
+
+overdue_days = max(0, (returned - due_date).days)
+fine = overdue_days * fine_per_day
+
+print("\n===== LIBRARY REPORT =====")
+print("Issue Date:", issue.strftime("%d-%m-%Y"))
+print("Due Date:", due_date.strftime("%d-%m-%Y"))
+print("Return Date:", returned.strftime("%d-%m-%Y"))
+print("Overdue Days:", overdue_days)
+print("Total Fine: Rs.", fine)
